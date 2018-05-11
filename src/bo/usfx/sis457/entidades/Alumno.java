@@ -16,18 +16,21 @@ import java.util.GregorianCalendar;
 public class Alumno extends Persona {
     protected String CarnetUniversitario;
     protected int Semestre;
+    protected String[] asignaturaA;
     
-    public Alumno(String carnetUniversitario, int semestre, String carnetIdentidad, String nombre, Calendar fechaNacimiento) {
+    public Alumno(String carnetUniversitario, int semestre, String carnetIdentidad, String nombre, Calendar fechaNacimiento,String[] asignatura) {
         super(carnetIdentidad, nombre, fechaNacimiento);
         this.CarnetUniversitario = carnetUniversitario;
         this.Semestre = semestre;
+        this.asignaturaA=asignatura;
         //System.out.println("Se crea un Alumno");
     }
     
-    public Alumno(String carnetUniversitario, int semestre) {
+    public Alumno(String carnetUniversitario, int semestre,String[] asignatura) {
         super();
         this.CarnetUniversitario = carnetUniversitario;
         this.Semestre = semestre;
+        this.asignaturaA=asignatura;
         //System.out.println("Se crea un Alumno");
     }
     
@@ -46,7 +49,26 @@ public class Alumno extends Persona {
     public void setSemestre(int semestre) {
         this.Semestre = semestre;
     }
+    public String[] getAsignaturaA() {
+        return asignaturaA;
+    }
 
+    public void setAsignaturaA(String[] asignaturaA) {
+        this.asignaturaA = asignaturaA;
+    }
+    public String MostrarA(){
+        String cadena="";
+        for(int i=0; i<this.getAsignaturaA().length; i++){
+            cadena+="'"+this.getAsignaturaA()[i]+"'";
+            if(i<(this.getAsignaturaA().length-1)){
+                cadena+=",";
+            }
+        }
+        return cadena;
+    }
+    public void ModA(int con,String ab){
+        this.getAsignaturaA()[con]=ab;
+    }
     @Override
     public String toString() {
         return "Alumno{" 
@@ -55,6 +77,7 @@ public class Alumno extends Persona {
                 + ", Nombre=" + this.Nombre 
                 + ", FechaNacimiento=" + Utilitarios.getFechaCalendario(this.FechaNacimiento)
                 + ", CarnetUniversitario=" + this.CarnetUniversitario 
-                + ", Semestre=" + this.Semestre + '}';
+                + ", Semestre=" + this.Semestre +",Asignatura=["+MostrarA()
+                +"]"+'}';
     }
 }
